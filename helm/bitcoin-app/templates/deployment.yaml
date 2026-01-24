@@ -37,6 +37,15 @@ spec:
             - name: http
               containerPort: 3000
               protocol: TCP
+          # --- ADD THIS SECTION START ---
+          volumeMounts:
+            - name: nginx-cache
+              mountPath: /var/cache/nginx
+            - name: nginx-run
+              mountPath: /var/run
+            - name: nginx-tmp
+              mountPath: /tmp
+          # --- ADD THIS SECTION END ---
           livenessProbe:
             {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:
@@ -47,6 +56,15 @@ spec:
           env:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+      # --- ADD THIS SECTION START ---
+      volumes:
+        - name: nginx-cache
+          emptyDir: {}
+        - name: nginx-run
+          emptyDir: {}
+        - name: nginx-tmp
+          emptyDir: {}
+      # --- ADD THIS SECTION END ---
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

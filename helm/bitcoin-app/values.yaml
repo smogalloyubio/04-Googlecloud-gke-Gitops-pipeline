@@ -3,7 +3,7 @@
 replicaCount: 3
 
 image:
-  repository: rukevweubio/bitcoin-app
+  repository: rukevweubio/my-ecommerceapp
   pullPolicy: Always
   tag: "latest"
 

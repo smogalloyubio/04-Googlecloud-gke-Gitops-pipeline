@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: react-app
-        image: rukevweubio/react-app: ca23a277f5901ea5abd95207e8b5fe4f796e6a1c
+        image: rukevweubio/react-app:latest
         ports:
         - containerPort: 80
         

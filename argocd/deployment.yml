@@ -5,7 +5,7 @@ metadata:
   labels:
     app: react-web
 spec:
-  replicas: 2 # Runs on both your master and worker nodes
+  replicas: 5
   selector:
     matchLabels:
       app: react-web
@@ -16,7 +16,6 @@ spec:
     spec:
       containers:
       - name: react-app
-        # REPLACE this with your actual Docker Hub image from your GitHub Action
         image: rukevweubio/react-app:latest
         ports:
         - containerPort: 80

@@ -16,12 +16,12 @@ spec:
     spec:
       securityContext:
         runAsNonRoot: true
-        runAsUser: 1000
+        runAsUser: 101 # Nginx unprivileged user is 101; standard is 1000
         fsGroup: 1000
       containers:
         - name: bitcoin-app
           image: rukevweubio/mario-game-ubio:latest
-          imagePullPolicy: Never
+          imagePullPolicy: IfNotPresent # CHANGED: "Never" will fail in the cloud
           ports:
             - containerPort: 80
           securityContext:
@@ -33,16 +33,28 @@ spec:
           livenessProbe:
             httpGet:
               path: /
-              port: 3000
+              port: 80 # CHANGED: Must be 80 for Nginx
             initialDelaySeconds: 30
             periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 3
           readinessProbe:
             httpGet:
               path: /
-              port: 3000
+              port: 80 # CHANGED: Must be 80 for Nginx
             initialDelaySeconds: 10
             periodSeconds: 5
-            timeoutSeconds: 5
-            failureThreshold: 2
+          # --- ADDED: Nginx needs these to start on a Read-Only system ---
+          volumeMounts:
+            - name: nginx-cache
+              mountPath: /var/cache/nginx
+            - name: nginx-run
+              mountPath: /var/run
+            - name: tmp-dir
+              mountPath: /tmp
+      # --- ADDED: The actual writable memory folders ---
+      volumes:
+        - name: nginx-cache
+          emptyDir: {}
+        - name: nginx-run
+          emptyDir: {}
+        - name: tmp-dir
+          emptyDir: {}

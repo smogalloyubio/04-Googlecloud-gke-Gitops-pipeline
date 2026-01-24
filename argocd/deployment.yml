@@ -19,7 +19,4 @@ spec:
         image: rukevweubio/react-app:latest
         ports:
         - containerPort: 80
-        resources:
-          limits:
-            memory: "256Mi"
-            cpu: "500m"
+        

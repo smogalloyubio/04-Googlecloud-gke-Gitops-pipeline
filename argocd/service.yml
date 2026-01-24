@@ -8,6 +8,6 @@ spec:
     app: react-web
   ports:
     - protocol: TCP
-      port: 80        # The port inside the cluster
-      targetPort: 80  # The port the React app listens on
-      nodePort: 30005 # The port you will use in your browser
+      port: 80       
+      targetPort: 80  
+      nodePort: 30005 

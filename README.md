@@ -245,6 +245,7 @@ kubectl patch svc argocd-server -n argocd \
 
 ```
 
+![argocd pipeline](https://github.com/smogalloyubio/04-Googlecloud-gke-Gitops-pipeline/blob/main/picture/Screenshot%202026-01-24%20at%2022.38.17.png)
 ---
 
 ## Prerequisites
